@@ -8,7 +8,8 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
+//Agregué al elemento Id por Name
+const listaProductos = document.getElementById("lista-de-productos")
 const $i = document.querySelector('.input');
 
 for (let i = 0; i < productos.length; i++) {
@@ -21,11 +22,11 @@ for (let i = 0; i < productos.length; i++) {
   
   var imagen = document.createElement("img");
   imagen.setAttribute('src', productos[i].img);
+//modifiqué el orden de las entradas de las variables y agregué palabra body
+  document.body.appendChild(d)
+  document.body.appendChild(ti)
 
-  d.appendChild(ti)
-  d.appendChild(imagen)
-
-  li.appendChild(d)
+  document.body.appendChild(imagen)
 }
 
 displayProductos(productos)
