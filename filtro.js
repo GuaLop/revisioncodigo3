@@ -1,5 +1,4 @@
 // Tenemos un li de productos
-
 const productos = [
   {nombre: "Zapato negro", tipo: "zapato", color: "negro", img: "./taco-negro.jpg"},
   {nombre: "Zapato azul", tipo: "zapato", color: "azul", img: "./taco-azul.jpg"},
@@ -9,28 +8,31 @@ const productos = [
 ]
 
 //Agregué al elemento Id por Name
-const listaProductos = document.getElementById("lista-de-productos")
-const $i = document.querySelector('.input');
-
-for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
-
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
-  
-  var imagen = document.createElement("img");
-  imagen.setAttribute('src', productos[i].img);
-//modifiqué el orden de las entradas de las variables y agregué palabra body
-  document.body.appendChild(d)
-  document.body.appendChild(ti)
-
-  document.body.appendChild(imagen)
-}
-
-displayProductos(productos)
+const li = document.getElementById("lista-de-productos");
+const $i = document.querySelector('input');
 const botonDeFiltro = document.querySelector("button");
+
+displayProductos(productos);
+
+//Agregué la funcion porque no existia
+function displayProductos(p){
+  for (let i = 0; i < p.length; i++) {
+    var d = document.createElement("div");
+    d.classList.add("producto");
+  
+    var ti = document.createElement("p");
+    ti.classList.add("titulo");
+    ti.textContent = p[i].nombre;
+    
+    var imagen = document.createElement("img");
+    imagen.setAttribute('src', p[i].img);
+  //modifiqué el orden de las entradas de las variables, agregué los elementos al div y agregué
+  //el div al div "lista-de-productos"
+    d.appendChild(imagen);
+    d.appendChild(ti);
+    li.appendChild(d);
+  }
+}
 
 botonDeFiltro.onclick = function() {
   while (li.firstChild) {
@@ -38,25 +40,9 @@ botonDeFiltro.onclick = function() {
   }
 
   const texto = $i.value;
-  console.log(texto);
-  const productosFiltrados = filtrado(productos, texto );
-
-  for (let i = 0; i < productosFiltrados.length; i++) {
-    var d = document.createElement("div")
-    d.classList.add("producto")
-  
-    var ti = document.createElement("p")
-    ti.classList.add("titulo")
-    ti.textContent = productosFiltrados[i].nombre
-    
-    var imagen = document.createElement("img");
-    imagen.setAttribute('src', productosFiltrados[i].img);
-  
-    d.appendChild(ti)
-    d.appendChild(imagen)
-  
-    li.appendChild(d)
-  }
+  const productosFiltrados = filtrado(productos, texto);
+//eliminé  todo el código repetido y solo mandé a llamar la funcion anterior con el arreglo
+  displayProductos(productosFiltrados);
 }
 
 const filtrado = (productos = [], texto) => {
